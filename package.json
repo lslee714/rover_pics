@@ -18,6 +18,10 @@
     "autoprefixer": "^9.4.9",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.0",
+    "eslint": "^6.7.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-react": "^7.16.0",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.11.0",
     "postcss-loader": "^3.0.0",
@@ -33,10 +37,49 @@
     "ejs": "^2.6.1",
     "exports-loader": "^0.7.0",
     "express": "^4.16.4",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.1",
     "mini-css-extract-plugin": "^0.5.0",
     "popper.js": "^1.14.7",
     "precss": "^4.0.0",
     "react-bootstrap": "^1.0.0-beta.5"
-  }
+  },
+  "eslintConfig": {
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "brace-style": [
+            "error",
+            "stroustrup"
+        ],
+        "no-unused-vars": [
+            "warn"
+        ],
+        "no-var": [
+            "off"
+        ],
+        "one-var": [
+            "off"
+        ]
+    }
+  }  
 }
