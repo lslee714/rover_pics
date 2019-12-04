@@ -4,12 +4,16 @@ export const AVAILABLE_CAMS = [
     name: 'Front Hazard Avoidance Camera',
   },
   {
+    id: 'RHAZ',
+    name: 'Rear Hazard Avoidance Camera'
+  },
+  {
     id: 'MAST',
     name: 'Mast Camera',
   },
   {
     id: 'CHEMCAM',
-    name: 'Mast Camera',
+    name: 'Chemistry and Camera Complex	',
   },
   {
     id: 'MAHLI',
@@ -46,7 +50,7 @@ export const AVAILABLE_ROVERS_BY_ID= {
     name: 'Spirit',
     cams: ['FHAZ', 'RHAZ', 'NAVCAM', 'PANCAM', 'MINITES']
   }
-}
+};
 
 export class AvailableRoverCams {
   constructor() {
@@ -69,5 +73,15 @@ export class AvailableRoverCams {
   getRoverName(roverId) {
     const rover = this.rovers[roverId];
     return rover.name;
+  }
+
+  getCamName(camId) {
+    const cam = AVAILABLE_CAMS.filter(
+      cam => cam.id === camId
+    )[0];
+    if(!cam) {
+      console.log("NO CAM for ", camId);
+    }
+    return cam ? cam.name : null;
   }
 }
