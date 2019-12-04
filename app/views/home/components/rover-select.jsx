@@ -10,7 +10,6 @@ class RoverSelect extends React.Component {
   constructor(props) {
     super(props);
     this.roverHelper = new AvailableRoverCams();
-    this.state =  {ids: []};
   }
 
   handleRoverSelect(evt) {
@@ -21,7 +20,7 @@ class RoverSelect extends React.Component {
         selected.push(option.value);
       }
     });
-    this.props.selectRovers({ ids: selected});
+    this.props.selectRovers(selected);
   }
 
   render() {

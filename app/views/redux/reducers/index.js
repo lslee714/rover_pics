@@ -1,4 +1,4 @@
 import { combineReducers } from "redux";
-import roverReducer from "./rovers";
+import rovers from "./rovers";
 
-export default combineReducers({ roverReducer });
+export default combineReducers({ rovers });
