@@ -1,8 +1,8 @@
 import { SELECT_ROVER } from './action-types';
 
-export const selectRover = idRover => ({
+export const selectRovers = roverIds => ({
   type: SELECT_ROVER,
   payload: {
-    id: idRover
+    ids: roverIds
   }
-}) 
+});
