@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Form } from 'react-bootstrap';
 
-import { AvailableRoverCams } from '../../../helpers/available-rover-cams';
+import { AvailableRoverCams } from '../../helpers/available-rover-cams';
 
 
 export class RoverSelect extends React.Component {
