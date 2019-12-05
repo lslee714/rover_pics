@@ -4,6 +4,7 @@ import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { AvailableRoverCams } from '../../helpers/available-rover-cams';
+import { selectCams } from '../../redux/actions';
 import { getSelectedRoverIds } from '../../redux/selectors';
 
 class CamSelect extends React.Component {
@@ -20,6 +21,7 @@ class CamSelect extends React.Component {
         selected.push(option.value);
       }
     });
+    this.props.selectCams(selected);
   }
 
   render() {
@@ -42,7 +44,8 @@ class CamSelect extends React.Component {
 }
 
 CamSelect.propTypes = {
-  availableCams: PropTypes.arrayOf(PropTypes.string)
+  availableCams: PropTypes.arrayOf(PropTypes.string),
+  selectCams: PropTypes.func.isRequired
 };
 
 export default connect(
@@ -59,4 +62,4 @@ export default connect(
       {availableCams: [...new Set(cams)]}
     );
   }
-)(CamSelect);
+, { selectCams })(CamSelect);

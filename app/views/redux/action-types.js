@@ -1,1 +1,2 @@
-export const SELECT_ROVER = 'SELECT_ROVER';
+export const SELECT_ROVERS = 'SELECT_ROVERS';
+export const SELECT_CAMS = 'SELECT_CAMS';
