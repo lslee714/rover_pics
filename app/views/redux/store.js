@@ -1,6 +1,19 @@
 import { createStore, applyMiddleware } from "redux";
 import logger from 'redux-logger';
+import { createEpicMiddleware } from 'redux-observable';
 
-import rootReducer from "./reducers";
+import { combinedReducers, rootEpic } from "./reducers";
 
-export default createStore(rootReducer, applyMiddleware(logger));
+const reduxObservableMiddleware = createEpicMiddleware();
+
+
+export default function configureStore() {
+  const store = createStore(
+    combinedReducers,
+    applyMiddleware(reduxObservableMiddleware)
+  );
+
+  reduxObservableMiddleware.run(rootEpic);
+
+  return store;
+}

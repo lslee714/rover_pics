@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Form } from 'react-bootstrap';
 
 import { AvailableRoverCams } from '../../helpers/available-rover-cams';
-import { selectRovers } from '../../redux/actions';
+import { selectRovers, getMaxSol } from '../../redux/actions';
 
 class RoverSelect extends React.Component {
   constructor(props) {
@@ -20,7 +20,9 @@ class RoverSelect extends React.Component {
         selected.push(option.value);
       }
     });
+    const roverNames = selected.map(roverId => this.roverHelper.getRoverName(roverId));
     this.props.selectRovers(selected);
+    this.props.getMaxSol(roverNames);
   }
 
   render() {
@@ -42,10 +44,11 @@ class RoverSelect extends React.Component {
 }
 
 RoverSelect.propTypes = {
-  selectRovers: PropTypes.func.isRequired
+  selectRovers: PropTypes.func.isRequired,
+  getMaxSol: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
-  { selectRovers },
+  { selectRovers, getMaxSol },
 )(RoverSelect);

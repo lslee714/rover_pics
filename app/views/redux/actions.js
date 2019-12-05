@@ -1,4 +1,4 @@
-import { SELECT_ROVERS, SELECT_CAMS } from './action-types';
+import { SELECT_ROVERS, SELECT_CAMS, GET_MAX_SOL, LOAD_MAX_SOL } from './action-types';
 
 export const selectRovers = roverIds => ({
   type: SELECT_ROVERS,
@@ -15,3 +15,22 @@ export const selectCams = camIds => (
     }
   }
 );  
+
+export const getMaxSol = roverNames => (
+  {
+    type: GET_MAX_SOL,
+    payload: {
+      roverNames: roverNames
+    }
+  }
+);
+
+
+export const loadMaxSol = maxSol => (
+  {
+    type: LOAD_MAX_SOL,
+    payload: {
+      maxSol: maxSol
+    }
+  }
+);
