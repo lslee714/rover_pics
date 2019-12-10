@@ -3,9 +3,9 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { AvailableRoverCams } from '../../helpers/available-rover-cams';
-import { selectCams } from '../../redux/actions';
-import { getSelectedRoverIds } from '../../redux/selectors';
+import { AvailableRoverCams } from '../../../helpers/available-rover-cams';
+import { selectCams } from '../../../redux/actions';
+import { getSelectedRoverIds } from '../../../redux/selectors';
 
 class CamSelect extends React.Component {
   constructor(...args) {
@@ -27,17 +27,15 @@ class CamSelect extends React.Component {
   render() {
     return (
       <>
-        <Form>
-            <Form.Group controlId='camSelect'>
-                <Form.Label>Pick camera(s)</Form.Label>
-                <Form.Control as="select" multiple onChange={this.handleCamSelect.bind(this)}>
-                    {this.props.availableCams.map((camId) => {
-                      const camName = this.roverHelper.getCamName(camId);
-                      return <option key={camId} value={camId}>{camName}</option>;
-                    })}
-                </Form.Control>
-            </Form.Group>
-        </Form>
+        <Form.Group controlId='camSelect'>
+            <Form.Label>Pick camera(s)</Form.Label>
+            <Form.Control as="select" multiple onChange={this.handleCamSelect.bind(this)}>
+                {this.props.availableCams.map((camId) => {
+                  const camName = this.roverHelper.getCamName(camId);
+                  return <option key={camId} value={camId}>{camName}</option>;
+                })}
+            </Form.Control>
+        </Form.Group>
       </>
     );
   }

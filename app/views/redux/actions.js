@@ -29,8 +29,6 @@ export const getMaxSol = roverNames => (
 export const loadMaxSol = maxSol => (
   {
     type: LOAD_MAX_SOL,
-    payload: {
-      maxSol: maxSol
-    }
+    payload: maxSol
   }
 );

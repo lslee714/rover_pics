@@ -3,8 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'react-bootstrap';
 
-import { AvailableRoverCams } from '../../helpers/available-rover-cams';
-import { selectRovers, getMaxSol } from '../../redux/actions';
+import { AvailableRoverCams } from '../../../helpers/available-rover-cams';
+import { selectRovers, getMaxSol } from '../../../redux/actions';
 
 class RoverSelect extends React.Component {
   constructor(props) {
@@ -28,16 +28,14 @@ class RoverSelect extends React.Component {
   render() {
     return (
       <>
-        <Form>
-            <Form.Group controlId='roverSelect'>
-                <Form.Label>Pick rover(s)</Form.Label>
-                <Form.Control as="select" multiple onChange={this.handleRoverSelect.bind(this)}>
-                    {this.roverHelper.getRovers().map((rover) => {
-                      return <option key={rover.id} value={rover.id}>{rover.name}</option>;
-                    })}
-                </Form.Control>
-            </Form.Group>
-        </Form>
+        <Form.Group controlId='roverSelect'>
+            <Form.Label>Pick rover(s)</Form.Label>
+            <Form.Control as="select" multiple onChange={this.handleRoverSelect.bind(this)}>
+                {this.roverHelper.getRovers().map((rover) => {
+                  return <option key={rover.id} value={rover.id}>{rover.name}</option>;
+                })}
+            </Form.Control>
+        </Form.Group>
       </>
     );
   }

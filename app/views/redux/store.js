@@ -10,7 +10,7 @@ const reduxObservableMiddleware = createEpicMiddleware();
 export default function configureStore() {
   const store = createStore(
     combinedReducers,
-    applyMiddleware(reduxObservableMiddleware)
+    applyMiddleware(reduxObservableMiddleware, logger)
   );
 
   reduxObservableMiddleware.run(rootEpic);
