@@ -21,7 +21,9 @@ class SolInput extends React.Component {
               className="sol-input" 
               placeholder="Enter sol" 
               type="number" 
-              max={this.props.maxSol}>
+              max={this.props.maxSol}
+              required
+              >
             </Form.Control>
           </Form.Group>
         </>

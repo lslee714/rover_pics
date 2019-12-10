@@ -29,7 +29,9 @@ class CamSelect extends React.Component {
       <>
         <Form.Group controlId='camSelect'>
             <Form.Label>Pick camera(s)</Form.Label>
-            <Form.Control as="select" multiple onChange={this.handleCamSelect.bind(this)}>
+            <Form.Control as="select" 
+              className="hide-scroll"
+              multiple required onChange={this.handleCamSelect.bind(this)}>
                 {this.props.availableCams.map((camId) => {
                   const camName = this.roverHelper.getCamName(camId);
                   return <option key={camId} value={camId}>{camName}</option>;

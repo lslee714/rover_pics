@@ -30,7 +30,9 @@ class RoverSelect extends React.Component {
       <>
         <Form.Group controlId='roverSelect'>
             <Form.Label>Pick rover(s)</Form.Label>
-            <Form.Control as="select" multiple onChange={this.handleRoverSelect.bind(this)}>
+            <Form.Control as="select"    
+              className="hide-scroll"
+              multiple required onChange={this.handleRoverSelect.bind(this)}>
                 {this.roverHelper.getRovers().map((rover) => {
                   return <option key={rover.id} value={rover.id}>{rover.name}</option>;
                 })}
