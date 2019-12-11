@@ -1,9 +1,9 @@
-import { SELECT_ROVERS, SELECT_CAMS, GET_MAX_SOL, LOAD_MAX_SOL } from './action-types';
+import { SELECT_ROVERS, SELECT_CAMS, GET_MAX_SOL, LOAD_MAX_SOL, SUBMIT_FORM, RESET_FORM } from './action-types';
 
-export const selectRovers = roverIds => ({
+export const selectRovers = rovers => ({
   type: SELECT_ROVERS,
   payload: {
-    selectedIds: roverIds
+    selected: rovers
   }
 });
 
@@ -11,7 +11,7 @@ export const selectCams = camIds => (
   {
     type: SELECT_CAMS,
     payload: {
-      selectedCams: camIds
+      selectedIds: camIds
     }
   }
 );  
@@ -30,5 +30,17 @@ export const loadMaxSol = maxSol => (
   {
     type: LOAD_MAX_SOL,
     payload: maxSol
+  }
+);
+
+export const submitForm = () => (
+  {
+    type: SUBMIT_FORM
+  }
+);
+
+export const resetForm = () => (
+  {
+    type: RESET_FORM
   }
 );
