@@ -37,43 +37,25 @@ export const AVAILABLE_CAMS = [
   }
 ];
 
-export const AVAILABLE_ROVERS_BY_ID= {
-  'C': {
-    name: 'Curiosity',
-    cams: ['FHAZ', 'RHAZ', 'MAST', 'CHEMCAM', 'MAHLI', 'MARDI', 'NAVCAM']
-  },
-  'O': {
-    name: 'Opportunity',
-    cams: ['FHAZ', 'RHAZ', 'NAVCAM', 'PANCAM', 'MINITES']
-  },
-  'S': {
-    name: 'Spirit',
-    cams: ['FHAZ', 'RHAZ', 'NAVCAM', 'PANCAM', 'MINITES']
-  }
+export const ROVERS_AND_CAMS= {
+  'Curiosity': ['FHAZ', 'RHAZ', 'MAST', 'CHEMCAM', 'MAHLI', 'MARDI', 'NAVCAM'],
+  'Opportunity': ['FHAZ', 'RHAZ', 'NAVCAM', 'PANCAM', 'MINITES'],
+  'Spirit': ['FHAZ', 'RHAZ', 'NAVCAM', 'PANCAM', 'MINITES']
 };
 
 export class AvailableRoverCams {
   constructor() {
-    this.rovers = AVAILABLE_ROVERS_BY_ID;
+    this.rovers = ROVERS_AND_CAMS;
   }
 
-  getRovers() {
-    const rovers = [];
-    for (let [id, info] of Object.entries(this.rovers)) {
-      rovers.push({id: id, name: info.name});
-    }
-    return rovers;
+  getRoverNames() {
+    return Object.keys(this.rovers);
   }
 
-  getRoverCams(roverId) {
-    const rover = this.rovers[roverId];
-    return rover.cams;
+  getRoverCams(roverName) {
+    return this.rovers[roverName];
   }
 
-  getRoverName(roverId) {
-    const rover = this.rovers[roverId];
-    return rover.name;
-  }
 
   getCamName(camId) {
     const cam = AVAILABLE_CAMS.filter(

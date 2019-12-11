@@ -20,9 +20,8 @@ class RoverSelect extends React.Component {
         selected.push(option.value);
       }
     });
-    const roverNames = selected.map(roverId => this.roverHelper.getRoverName(roverId));
     this.props.selectRovers(selected);
-    this.props.getMaxSol(roverNames);
+    this.props.getMaxSol(selected);
     this.props.onChange();
   }
 
@@ -34,8 +33,8 @@ class RoverSelect extends React.Component {
             <Form.Control as="select"
               className="hide-scroll"
               multiple required onChange={this.handleRoverSelect.bind(this)}>
-                {this.roverHelper.getRovers().map((rover) => {
-                  return <option key={rover.id} value={rover.id}>{rover.name}</option>;
+                {this.roverHelper.getRoverNames().map((rover) => {
+                  return <option key={rover} value={rover}>{rover}</option>;
                 })}
             </Form.Control>
         </Form.Group>

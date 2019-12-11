@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { AvailableRoverCams } from '../../../helpers/available-rover-cams';
 import { selectCams } from '../../../redux/actions';
-import { getSelectedRoverIds } from '../../../redux/selectors';
+import { getSelectedRoverNames } from '../../../redux/selectors';
 
 class CamSelect extends React.Component {
   constructor(...args) {
@@ -52,11 +52,11 @@ CamSelect.propTypes = {
 
 export default connect(
   state => {
-    const selectedRovers = getSelectedRoverIds(state);
+    const selectedRovers = getSelectedRoverNames(state);
     const roverHelper = new AvailableRoverCams();
     const cams = [];
-    selectedRovers.forEach(roverId => {
-      const camsForRover = roverHelper.getRoverCams(roverId);
+    selectedRovers.forEach(roverName => {
+      const camsForRover = roverHelper.getRoverCams(roverName);
       cams.push(...camsForRover);
     });
 
