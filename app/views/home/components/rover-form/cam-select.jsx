@@ -22,6 +22,7 @@ class CamSelect extends React.Component {
       }
     });
     this.props.selectCams(selected);
+    this.props.onChange();
   }
 
   render() {
@@ -45,7 +46,8 @@ class CamSelect extends React.Component {
 
 CamSelect.propTypes = {
   availableCams: PropTypes.arrayOf(PropTypes.string),
-  selectCams: PropTypes.func.isRequired
+  selectCams: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default connect(

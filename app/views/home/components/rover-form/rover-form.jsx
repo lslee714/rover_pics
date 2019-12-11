@@ -5,7 +5,6 @@ import Button from 'react-bootstrap/Button';
 
 import CamSelect from './cam-select';
 import  RoverSelect from './rover-select';
-import SolInput from './sol-input';
 
 export default class RoverForm extends React.Component {
 	constructor(props) {
@@ -13,31 +12,39 @@ export default class RoverForm extends React.Component {
 		this.state = {
 			validated: false
 		};
+		this.formRef = React.createRef();
 	}		
 
+	checkValidity() {
+		const isValid = this.formRef.current.checkValidity();
+		this.setState({validated: isValid});
+	}	
+
+	handleOnChange() {
+		this.checkValidity();
+	}
+
 	handleSubmit(evt) {
-		console.log(evt);
-		const form = evt.currentTarget;
-		console.log(form.checkValidity());
 		evt.preventDefault();
+		if(this.state.validated) {
+			console.log("Fire action to get stuff!");
+		}
 	}
 
 	render() {
 			return (
 			<>
 			<Form
+				ref={this.formRef}
 				noValidate
 				onSubmit={this.handleSubmit.bind(this)}
 				validated={this.state.validated.toString()}>
 					<Row>
-							<Col sm={5}>
-									<RoverSelect/>
+							<Col sm={6}>
+									<RoverSelect onChange={this.handleOnChange.bind(this)}/>
 							</Col>
-							<Col sm={5}>
-									<CamSelect/>
-							</Col>
-							<Col sm={2}>
-									<SolInput/>
+							<Col sm={6}>
+									<CamSelect onChange={this.handleOnChange.bind(this)}/> 
 							</Col>
 					</Row>
 					<Row>
@@ -46,7 +53,9 @@ export default class RoverForm extends React.Component {
 								<Button 
 									className="float-right minor-right-margin" 
 									type="submit"
-									variant="primary">
+									variant="primary"
+									disabled = {!this.state.validated}
+								>
 									Submit
 								</Button>
 							</Form.Group>

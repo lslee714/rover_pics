@@ -23,6 +23,7 @@ class RoverSelect extends React.Component {
     const roverNames = selected.map(roverId => this.roverHelper.getRoverName(roverId));
     this.props.selectRovers(selected);
     this.props.getMaxSol(roverNames);
+    this.props.onChange();
   }
 
   render() {
@@ -30,7 +31,7 @@ class RoverSelect extends React.Component {
       <>
         <Form.Group controlId='roverSelect'>
             <Form.Label>Pick rover(s)</Form.Label>
-            <Form.Control as="select"    
+            <Form.Control as="select"
               className="hide-scroll"
               multiple required onChange={this.handleRoverSelect.bind(this)}>
                 {this.roverHelper.getRovers().map((rover) => {
@@ -45,7 +46,8 @@ class RoverSelect extends React.Component {
 
 RoverSelect.propTypes = {
   selectRovers: PropTypes.func.isRequired,
-  getMaxSol: PropTypes.func.isRequired
+  getMaxSol: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default connect(
