@@ -4,9 +4,9 @@ import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { AvailableRoverCams } from '../../../helpers/available-rover-cams';
+import { intersection } from '../../../helpers/intersection';
 import { selectCams } from '../../../redux/actions';
 import { getSelectedRoverNames } from '../../../redux/selectors';
-
 class CamSelect extends React.Component {
   constructor(...args) {
     super(...args);
@@ -57,11 +57,11 @@ export default connect(
     const cams = [];
     selectedRovers.forEach(roverName => {
       const camsForRover = roverHelper.getRoverCams(roverName);
-      cams.push(...camsForRover);
+      cams.push(camsForRover);
     });
-
+    const camsForSelectedRovers = intersection(cams);
     return (
-      {availableCams: [...new Set(cams)]}
+      {availableCams: [...camsForSelectedRovers]}
     );
   }
 , { selectCams })(CamSelect);
