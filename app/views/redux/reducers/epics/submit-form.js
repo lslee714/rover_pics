@@ -1,34 +1,38 @@
 import { ofType } from 'redux-observable';
+import { of } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import { forkJoin, of, Observable } from 'rxjs';
-import { map, switchMap, catchError, withLatestFrom, takeUntil, exhaustMap } from 'rxjs/operators';
+import { Observable } from 'rxjs/Rx';
+import { map, switchMap, catchError, withLatestFrom, takeUntil, exhaustMap, skipWhile } from 'rxjs/operators';
 
 import { SUBMIT_FORM, RESET_FORM } from '../../action-types';
-import { loadMaxSol } from '../../actions';
+import {  resetForm, setPics } from '../../actions';
 
-const photosUrl = 'https://api.nasa.gov/mars-photos/api/v1/rovers/{rover}/photos?sol={sol}&camera={camera}&api_key=DEMO_KEY';
+const photosUrl = 'https://api.nasa.gov/mars-photos/api/v1/rovers/{rover}/photos?sol={sol}&camera={camera}&api_key=qIo7wzqaERMLk74ecs0caFIqFoFMCVgCMrWym7KA';
 
 export const submitFormEpic = (action$, state$) => action$.pipe(
   ofType(SUBMIT_FORM),
-  withLatestFrom(state$),
   switchMap(() => 
-      Observable.interval(5000).pipe(
+      Observable.timer(0, 300000).pipe(
         takeUntil(action$.pipe(ofType(RESET_FORM))),
         withLatestFrom(state$),
-        exhaustMap(state => {
-          const selectedRoversIds = state.rovers.selectedIds;
-          const selectedCamIds = state.camas.selectedIds;
-          return forkJoin(
-
+        exhaustMap(([_, state]) => {
+          const selectedRovers = state.rovers.selected;
+          const selectedCamIds = state.cams.selectedIds;
+          const maxSol = state.metadata.maxSol;
+          const aRoverName = selectedRovers[Math.floor(Math.random()*selectedRovers.length)];
+          const aCamId = selectedCamIds[Math.floor(Math.random()*selectedRovers.length)];
+          const randomSol = Math.floor(Math.random() * (maxSol - 0 + 1) + 0);
+          return ajax.getJSON(
+            photosUrl.replace('{rover}', aRoverName).replace('{sol}', randomSol.toString()).replace('{camera}', aCamId)
           ).pipe(
-            map(responses => {
-              const maxSols = responses.map(res => res.photo_manifest.max_sol);
-              const maxSol = Math.max(...maxSols);
-              return loadMaxSol({maxSol: maxSol});
+            map(response => {
+              const photos = response.photos;
+              const photoUrls = photos.map(photo => photo.img_src);
+              return setPics({urls: photoUrls});
             }),
             catchError(err => {
               console.log("ERR", err);
-              return of({});
+              return of(resetForm);
             })
           );
         }

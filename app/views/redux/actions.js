@@ -1,4 +1,4 @@
-import { SELECT_ROVERS, SELECT_CAMS, GET_MAX_SOL, LOAD_MAX_SOL, SUBMIT_FORM, RESET_FORM } from './action-types';
+import { SELECT_ROVERS, SELECT_CAMS, GET_MAX_SOL, LOAD_MAX_SOL, SUBMIT_FORM, RESET_FORM, SET_PICS } from './action-types';
 
 export const selectRovers = rovers => ({
   type: SELECT_ROVERS,
@@ -42,5 +42,12 @@ export const submitForm = () => (
 export const resetForm = () => (
   {
     type: RESET_FORM
+  }
+);
+
+export const setPics = pics => (
+  {
+    type: SET_PICS,
+    payload: pics
   }
 );

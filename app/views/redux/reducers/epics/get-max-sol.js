@@ -6,7 +6,7 @@ import { map, switchMap, catchError } from 'rxjs/operators';
 import { GET_MAX_SOL } from '../../action-types';
 import { loadMaxSol } from '../../actions';
 
-const manifestUrl = 'https://api.nasa.gov/mars-photos/api/v1/manifests/{roverName}?api_key=DEMO_KEY';
+const manifestUrl = 'https://api.nasa.gov/mars-photos/api/v1/manifests/{roverName}?api_key=qIo7wzqaERMLk74ecs0caFIqFoFMCVgCMrWym7KA';
 
 export const getMaxSolEpic = action$ => action$.pipe(
   ofType(GET_MAX_SOL),
