@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import { Form }  from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -6,7 +8,9 @@ import Button from 'react-bootstrap/Button';
 import CamSelect from './cam-select';
 import  RoverSelect from './rover-select';
 
-export default class RoverForm extends React.Component {
+import { submitForm } from '../../../redux/actions';
+
+class RoverForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -27,7 +31,7 @@ export default class RoverForm extends React.Component {
 	handleSubmit(evt) {
 		evt.preventDefault();
 		if(this.state.validated) {
-			console.log("Fire action to get stuff!");
+			this.props.submitForm();
 		}
 	}
 
@@ -67,3 +71,9 @@ export default class RoverForm extends React.Component {
 			);
 	}
 }
+
+RoverForm.propTypes = {
+	submitForm: PropTypes.func.isRequired
+};
+
+export default connect(null, {submitForm})(RoverForm);
