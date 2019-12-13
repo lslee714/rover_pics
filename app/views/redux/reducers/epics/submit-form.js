@@ -2,9 +2,9 @@ import { ofType } from 'redux-observable';
 import { of } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { Observable } from 'rxjs/Rx';
-import { map, switchMap, catchError, withLatestFrom, takeUntil, exhaustMap, skipWhile } from 'rxjs/operators';
+import { map, switchMap, catchError, withLatestFrom, takeUntil, exhaustMap } from 'rxjs/operators';
 
-import { SUBMIT_FORM, RESET_FORM } from '../../action-types';
+import { SUBMIT_FORM, RESET_PICS } from '../../action-types';
 import {  resetForm, setPics } from '../../actions';
 
 const photosUrl = 'https://api.nasa.gov/mars-photos/api/v1/rovers/{rover}/photos?sol={sol}&camera={camera}&api_key=qIo7wzqaERMLk74ecs0caFIqFoFMCVgCMrWym7KA';
@@ -12,8 +12,8 @@ const photosUrl = 'https://api.nasa.gov/mars-photos/api/v1/rovers/{rover}/photos
 export const submitFormEpic = (action$, state$) => action$.pipe(
   ofType(SUBMIT_FORM),
   switchMap(() => 
-      Observable.timer(0, 300000).pipe(
-        takeUntil(action$.pipe(ofType(RESET_FORM))),
+      Observable.timer(0, 3000).pipe(
+        takeUntil(action$.pipe(ofType(RESET_PICS))),
         withLatestFrom(state$),
         exhaustMap(([_, state]) => {
           const selectedRovers = state.rovers.selected;

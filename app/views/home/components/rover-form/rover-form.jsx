@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import CamSelect from './cam-select';
 import  RoverSelect from './rover-select';
 
-import { submitForm } from '../../../redux/actions';
+import { submitForm, resetPics } from '../../../redux/actions';
 
 class RoverForm extends React.Component {
 	constructor(props) {
@@ -52,17 +52,23 @@ class RoverForm extends React.Component {
 							</Col>
 					</Row>
 					<Row>
-						<Col sm={{ span: 4, offset: 8}}>
-							<Form.Group>
-								<Button 
-									className="float-right minor-right-margin" 
-									type="submit"
-									variant="primary"
-									disabled = {!this.state.validated}
-								>
-									Submit
-								</Button>
-							</Form.Group>
+						<Col sm={{ span: 4, offset: 8}} className='move-right'>
+							<Button 
+								type="submit"
+								variant="primary"
+								disabled = {!this.state.validated}
+							>
+								Submit
+							</Button>
+							<Button 
+								className="float-right minor-right-margin" 
+								type="button"
+								variant="danger"
+								onClick={this.props.resetPics}
+								disabled = {!this.props.photoUrls.length}
+							>
+								Reset
+							</Button>
 						</Col>
 					</Row>
 
@@ -73,7 +79,14 @@ class RoverForm extends React.Component {
 }
 
 RoverForm.propTypes = {
-	submitForm: PropTypes.func.isRequired
+	submitForm: PropTypes.func.isRequired,
+	resetPics: PropTypes.func.isRequired,
+	photoUrls: PropTypes.arrayOf(PropTypes.string)
 };
 
-export default connect(null, {submitForm})(RoverForm);
+export default connect(
+	state => { 
+		
+		return { photoUrls: state.pics.urls || [] };
+	}
+	, {submitForm, resetPics})(RoverForm);

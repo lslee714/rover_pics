@@ -4,4 +4,4 @@ export const GET_MAX_SOL = 'GET_MAX_SOL';
 export const LOAD_MAX_SOL = 'LOAD_MAX_SOL';
 export const SUBMIT_FORM= 'SUBMIT_FORM';
 export const SET_PICS = 'SET_PICS';
-export const RESET_FORM = 'RESET_FORM';
+export const RESET_PICS = 'RESET_PICS';
