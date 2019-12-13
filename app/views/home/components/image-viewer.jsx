@@ -33,13 +33,17 @@ class ImageViewer extends React.Component {
 	}
 
 	render() {
-		return (
-			<>
-				<div className="image-viewer">
-					<img className="rover-pic" src={this.state.url}/>
-				</div>
-			</>
-		);
+		if(this.state.url) {
+			return (
+				<>
+					<div className="image-viewer">
+						<img className="rover-pic" src={this.state.url}/>
+					</div>
+				</>
+			);
+		}
+ else return (<></>);
+		
 	}
 }
 
