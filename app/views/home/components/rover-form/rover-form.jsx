@@ -55,7 +55,7 @@ class RoverForm extends React.Component {
 						<Col sm={{ span: 4, offset: 8}} className='move-right'>
 							<Button 
 								type="submit"
-								variant="primary"
+								variant="success"
 								disabled = {!this.state.validated}
 							>
 								Submit

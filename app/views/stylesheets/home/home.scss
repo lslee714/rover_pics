@@ -10,7 +10,7 @@
 }
 
 .minor-right-margin {
-    margin-right: 10px;
+    margin-right: 10px !important;;
 }
 
 .hide-scroll::-webkit-scrollbar {
@@ -23,8 +23,12 @@
     text-align: right;
 }
 
+.margin-auto {
+    margin: auto;
+}
+
 .image-viewer {
-    width: 50%;
+    width: 90%;
     height: 50%;
     margin: auto;
     border: 1px solid;
@@ -32,4 +36,8 @@
         height: 100%;
         width: 100%;
     }
+}
+
+.inline {
+    display: inline-flex;
 }
