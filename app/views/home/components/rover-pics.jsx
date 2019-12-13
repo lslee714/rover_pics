@@ -1,6 +1,6 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
 
+import ImageViewer from './image-viewer';
 import Nav from './nav';
 import RoverForm from './rover-form/rover-form';
 
@@ -10,6 +10,7 @@ class App extends React.Component {
         <>
             <Nav/>
             <RoverForm/>
+            <ImageViewer/>
         </>
         );
     }

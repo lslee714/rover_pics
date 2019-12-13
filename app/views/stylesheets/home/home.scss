@@ -22,3 +22,14 @@
 .move-right {
     text-align: right;
 }
+
+.image-viewer {
+    width: 50%;
+    height: 50%;
+    margin: auto;
+    border: 1px solid;
+    .rover-pic {
+        height: 100%;
+        width: 100%;
+    }
+}

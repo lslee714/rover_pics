@@ -12,7 +12,7 @@ const photosUrl = 'https://api.nasa.gov/mars-photos/api/v1/rovers/{rover}/photos
 export const submitFormEpic = (action$, state$) => action$.pipe(
   ofType(SUBMIT_FORM),
   switchMap(() => 
-      Observable.timer(0, 3000).pipe(
+      Observable.timer(0, 300000).pipe(
         takeUntil(action$.pipe(ofType(RESET_PICS))),
         withLatestFrom(state$),
         exhaustMap(([_, state]) => {
