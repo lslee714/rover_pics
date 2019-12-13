@@ -20,7 +20,7 @@ export const getMaxSolEpic = action$ => action$.pipe(
       .pipe(
         map(responses => {
           const maxSols = responses.map(res => res.photo_manifest.max_sol);
-          const maxSol = Math.max(...maxSols);
+          const maxSol = Math.min(...maxSols);
           return loadMaxSol({maxSol: maxSol});
         }),
         catchError(err => {
