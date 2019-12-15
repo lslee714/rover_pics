@@ -2,11 +2,11 @@
     "name": "rover_pics",
     "version": "1.0.0",
     "description": "",
-    "main": "app/app.js",
+    "main": "app/server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "webpack --config webpack.config.js --mode development",
-        "start": "node app/app.js"
+        "start": "node app/server.js"
     },
     "keywords": [],
     "author": "",
@@ -53,7 +53,9 @@
     "eslintConfig": {
         "env": {
             "browser": true,
-            "es6": true
+            "es6": true,
+            "amd": true,
+            "node": true
         },
         "extends": [
             "eslint:recommended",
