@@ -25,7 +25,7 @@ class ImageViewer extends React.Component {
 			if(this.props.urls.length) {
 				this.setUrl();
 			}
-		}, 5000);
+		}, 3000);
 	}
 
 	componentWillUnmount() {

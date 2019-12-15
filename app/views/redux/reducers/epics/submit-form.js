@@ -1,5 +1,5 @@
 import { ofType } from 'redux-observable';
-import { of } from 'rxjs';
+import { of, forkJoin } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { Observable } from 'rxjs/Rx';
 import { switchMap, catchError, withLatestFrom, takeUntil, exhaustMap, mergeMap } from 'rxjs/operators';
@@ -14,22 +14,31 @@ let retries = 0;
 export const submitFormEpic = (action$, state$) => action$.pipe(
   ofType(SUBMIT_FORM),
   switchMap(() =>
-    Observable.timer(0, 300000).pipe(
+    Observable.timer(0, 60000).pipe(
       takeUntil(action$.pipe(ofType(RESET_PICS))),
       withLatestFrom(state$),
       exhaustMap(([_, state]) => {
+        let apiArgs = {};
         const selectedRovers = state.rovers.selected;
         const selectedCamIds = state.cams.selectedIds;
         const maxSol = state.metadata.maxSol;
-        const aRoverName = selectedRovers[Math.floor(Math.random() * selectedRovers.length)];
-        const aCamId = selectedCamIds[Math.floor(Math.random() * selectedRovers.length)];
-        const randomSol = Math.floor(Math.random() * (maxSol - 0 + 1) + 0);
-        return ajax.getJSON(
-          photosUrl.replace('{rover}', aRoverName).replace('{sol}', randomSol.toString()).replace('{camera}', aCamId)
+        selectedRovers.forEach(rover => {
+            apiArgs[rover] = {
+              cam: selectedCamIds[Math.floor(Math.random() * selectedRovers.length)],
+              sol: Math.floor(Math.random() * (maxSol - 0 + 1) + 0).toString()
+            };
+          });
+        return forkJoin(
+          Object.keys(apiArgs).map(roverName => {
+            const camAndSol = apiArgs[roverName];
+            return ajax.getJSON(photosUrl.replace('{rover}', roverName).replace('{sol}', camAndSol.sol).replace('{camera}', camAndSol.cam));
+          })
         ).pipe(
-          mergeMap(response => {
-            const photos = response.photos;
-            const photoUrls = photos.map(photo => photo.img_src);
+          mergeMap(responses => {
+            let photos = responses.map(response => response.photos);
+            photos = photos.flat();
+            const photoUrls = [];
+            photos.forEach(photo => photoUrls.push(photo.img_src));
             if (photoUrls.length) {
               retries = 0;
               return of(setPics({ urls: photoUrls }));
