@@ -11,4 +11,4 @@ RUN npm install --only=production
 
 COPY . /app
 
-CMD node app/server.js
+CMD npm start
