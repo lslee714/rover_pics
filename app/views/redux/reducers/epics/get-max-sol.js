@@ -6,6 +6,8 @@ import { map, switchMap, catchError } from 'rxjs/operators';
 import { GET_MAX_SOL } from '../../action-types';
 import { loadMaxSol } from '../../actions';
 
+//TODO fix this url and remove api key, at least make environment variable
+//NASA throttles requests anyway so not a big deal
 const manifestUrl = 'https://api.nasa.gov/mars-photos/api/v1/manifests/{roverName}?api_key=qIo7wzqaERMLk74ecs0caFIqFoFMCVgCMrWym7KA';
 
 export const getMaxSolEpic = action$ => action$.pipe(
