@@ -9,6 +9,6 @@
 <h4>To Run Locally:</h4>
 
 ```
-docker build -t whatever-tag-name
+docker build -t whatever-tag-name .
 docker run -p 8081:8081 whatever-tag-name
 ```
